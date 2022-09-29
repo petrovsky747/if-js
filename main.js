@@ -1,11 +1,10 @@
-(() => {
-  const palindrome = function (word) {
-    let result;
-    let letternum = 0;
+const palindrome = function (word) {
+  let result = false;
+    let letterNum = 0;
 
     for (let i = 0; i < word.length / 2; i++) {
-      letternum += 1;
-      result = word[i] === word[word.length - letternum];
+      letterNum += 1;
+      result = word[i] === word[word.length - letterNum];
       if (result === false) {
         break;
       }
@@ -13,8 +12,8 @@
     return result;
   };
 
-  const myword = 'шалаш';
-  console.log(palindrome(myword));
+  const myWord = 'шалаш';
+  console.log(palindrome(myWord));
 
   const min = function (a, b) {
     return a < b ? `${a}` : `${b}`;
@@ -28,7 +27,7 @@
 
   console.log(max(15, 256));
 
-  const mas = [2, 50, 8, 100, 0, 6, 20, 3, 30, 58];
+  const arr = [2, 50, 8, 100, 0, 6, 20, 3, 30, 58];
 
   const replaceZero = function (m) {
     for (let i = 0; i < m.length; i++) {
@@ -46,6 +45,4 @@
     }
     return m;
   };
-
-  console.log(replaceZero(mas));
-})();
+  console.log(replaceZero(arr));
