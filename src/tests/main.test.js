@@ -1,7 +1,7 @@
 import { sum, getColor } from '../scripts/utils.js';
 
 // eslint-disable-next-line no-undef
-test('When adding new valid product, get successful confirmation', () => {
+test('Addition function test', () => {
   const k = 1;
   const j = 2;
   // eslint-disable-next-line no-undef
@@ -24,7 +24,7 @@ for (let i = 0; i < 6; i++) {
 const check = k === j;
 
 // eslint-disable-next-line no-undef
-test('When adding new valid product, get successful confirmation', () => {
+test('Checking for equality of values returned by functions', () => {
   // eslint-disable-next-line no-undef
   expect(check).toBe(true);
 });
