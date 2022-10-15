@@ -1,25 +1,69 @@
-import { sum, getColor } from './utils.js';
+const myDate = '1995-11-07';
 
-console.log(sum(5)(2));
+const re = /(?<yyyy>\d+)-(?<mm>\d+)-(?<dd>\d+)/;
 
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+const convertDate = function (date) {
+  return date.replace(re, `$<dd>.$<mm>.$<yyyy>`);
+};
 
-const switchColor1 = getColor(colors);
-const switchColor2 = getColor(colors);
-const switchColor3 = getColor(colors);
+console.log(convertDate(myDate));
 
-const text1 = document.getElementById('text1');
-const text2 = document.getElementById('text2');
-const text3 = document.getElementById('text3');
+const data = [
+  {
+    country: 'Russia',
+    city: 'Saint Petersburg',
+    hotel: 'Hotel Leopold',
+  },
+  {
+    country: 'Spain',
+    city: 'Santa Cruz de Tenerife',
+    hotel: 'Apartment Sunshine',
+  },
+  {
+    country: 'Slowakia',
+    city: 'Vysokie Tatry',
+    hotel: 'Villa Kunerad',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hostel Friendship',
+  },
+  {
+    country: 'Indonesia',
+    city: 'Bali',
+    hotel: 'Ubud Bali Resort&SPA',
+  },
+  {
+    country: 'Netherlands',
+    city: 'Rotterdam',
+    hotel: 'King Kong Hostel',
+  },
+  {
+    country: 'Marocco',
+    city: 'Ourika',
+    hotel: 'Rokoko Hotel',
+  },
+  {
+    country: 'Germany',
+    city: 'Berlin',
+    hotel: 'Hotel Rehberge Berlin Mitte',
+  },
+];
 
-text1.addEventListener('click', (event) => {
-  event.target.style.color = switchColor1();
-});
+const find = 'germany';
 
-text2.addEventListener('click', (event) => {
-  event.target.style.color = switchColor2();
-});
+const re2 = new RegExp(`${find}`, 'i');
 
-text3.addEventListener('click', (event) => {
-  event.target.style.color = switchColor3();
-});
+const search = function (str) {
+  const result = [];
+  for (let i = 0; i < data.length; i++) {
+    const obj = `${data[i].country}, ${data[i].city}, ${data[i].hotel}`;
+    if (obj.match(str) !== null) {
+      result[result.length] = obj.match(str).input;
+    }
+  }
+  return result;
+};
+
+console.log(search(re2));
