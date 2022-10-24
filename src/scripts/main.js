@@ -160,38 +160,38 @@ const palindrome = function (word) {
   return word === word.split('').reverse().join('');
 };
 
-const myword = 'шалаш';
-console.log(palindrome(myword));
+const myWord = 'шалаш';
+console.log(palindrome(myWord));
 
-const find = 'germany';
+const filterItems = (find) =>
+  hotels.reduce((result, item) => {
+    const re2 = new RegExp(`${find}`, 'i');
+    const str = `${item.country}, ${item.city}, ${item.name}`;
+    if (str.match(re2) !== null) {
+      result.push(str.match(re2).input);
+    }
+    return result;
+  }, []);
 
-const re2 = new RegExp(`${find}`, 'i');
-
-const filterItems = hotels.reduce((result, item) => {
-  const str = `${item.country}, ${item.city}, ${item.name}`;
-  if (str.match(re2) !== null) {
-    result.push(str.match(re2).input);
-  }
-  return result;
-}, []);
-
-console.log(filterItems);
-
-// __________________________________________________________________________________
+console.log(filterItems('usa'));
 
 const tmpArray = [];
-const tmpObject = [];
+const allCities = {};
 
 const uniqueCountry = (arr) => {
   arr.forEach((item) => {
     if (tmpArray.indexOf(item.country) === -1) {
       tmpArray.push(item.country, item.city);
-      tmpObject.push({ [item.country]: [item.city] });
+      allCities[`${item.country}`] = [item.city];
     } else {
-      tmpObject.item.country.push(item.city);
+      if (allCities[`${item.country}`].includes(item.city) === true) {
+        allCities[`${item.country}`] = [item.city];
+      } else {
+        allCities[`${item.country}`].push(item.city);
+      }
     }
   });
-  return tmpObject;
+  return allCities;
 };
 
 console.log(uniqueCountry(hotels));
