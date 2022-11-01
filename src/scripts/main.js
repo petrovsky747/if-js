@@ -36,7 +36,7 @@ function deepEqual(object1, object2) {
   const checkNotNull = object1 !== null && object2 !== null;
 
   if (checkObject && checkNotNull) {
-    for (let prop in object1) {
+    for (const prop in object1) {
       if (!(prop in object2)) return false;
       if (
         typeof object1[prop] === 'object' &&
@@ -47,8 +47,8 @@ function deepEqual(object1, object2) {
       } else {
         if (object1[prop] !== object2[prop]) return false;
       }
-      return true;
     }
+    return true;
   } else {
     return object1 === object2;
   }
@@ -56,3 +56,4 @@ function deepEqual(object1, object2) {
 
 console.log(deepEqual(obj1, obj2));
 console.log(deepEqual(obj1, obj3));
+console.log(deepEqual({ a: 'a', b: { a: 'a' } }, { a: 'a', b: { b: 'b' } }));
