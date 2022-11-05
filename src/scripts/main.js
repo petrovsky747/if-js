@@ -1,6 +1,4 @@
 import Students from './entities/Students.js';
-import Student from './entities/Student.js';
-import User from './entities/User.js';
 
 const studentsData = [
   {
