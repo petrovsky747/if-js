@@ -28,5 +28,4 @@ const studentsData = [
 ];
 
 const std1 = new Students(studentsData);
-// // console.log(std1.getInfo());
 console.log(std1.getInfo());
