@@ -1,16 +1,16 @@
 import Student from './Student.js';
 
 export default class Students extends Student {
-  constructor(students, ...props) {
+  constructor([...props]) {
     super(props);
-    this.students = students;
   }
 
   getInfo() {
-    const result = [];
-    for (let i = 0; i < this.students.length; i++) {
+    let result = [];
+    console.log(this);
+    for (let i = 0; i < this.length; i++) {
       result.push(
-        `${this.students[i].fullName} - ${this.students[i].courseName}, ${this.students[i].course} курс`,
+        `${this[i].fullName} - ${this[i].courseName}, ${this[i].course} курс`,
       );
     }
     return result;
