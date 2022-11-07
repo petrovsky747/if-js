@@ -8,10 +8,7 @@ export default class Student extends User {
   }
 
   get course() {
-    return 2022 - this.admissionYear;
+    const now = new Date();
+    return now.getFullYear() - this.admissionYear;
   }
-}
-
-export function byField(field) {
-  return (a, b) => (a[field] < b[field] ? 1 : -1);
 }
