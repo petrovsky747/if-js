@@ -33,60 +33,52 @@ const data = [
   },
 ];
 
-const advantagesSection = document.querySelector('.destinations');
-const homesSection = document.createElement('section');
-homesSection.className = 'homes';
-advantagesSection.insertAdjacentElement('beforebegin', homesSection);
+const addImages = () => {
+  const markupArr = [];
+  data.forEach((el, index) => {
+    const cssLi = ['hotel', 'apartment', 'villa', 'hostel'];
+    markupArr[index] = `<div id="${el.id}" class="col-lg-3 col-md-6 col-sm-3">
+      <div class="homes-col ${cssLi[index]}">
+        <img class="homes-col__image" src="${el.imageUrl}" alt="${cssLi[index]}">
+      </div>
+    </div>`;
+  });
+  return markupArr.join('');
+};
 
-const homesContainer = document.createElement('div');
-homesContainer.classList.add('container', 'homes-container');
-const homesTitle = document.createElement('h2');
-homesTitle.classList.add('title', 'homes-title');
-homesTitle.textContent = 'Homes guests loves';
-const homesImages = document.createElement('div');
-homesImages.classList.add('row', 'homes-row', 'homes-images');
-const homesLinks = document.createElement('div');
-homesLinks.classList.add('row', 'homes-row', 'homes-links');
-homesSection.appendChild(homesContainer);
-homesContainer.appendChild(homesTitle);
-homesContainer.appendChild(homesImages);
-homesContainer.appendChild(homesLinks);
+const addLinks = () => {
+  const markupArr = [];
+  data.forEach((el, index) => {
+    const cssLi = ['hotel', 'apartment', 'villa', 'hostel'];
+    markupArr[index] = `
+      <div class="col-lg-3 col-md-6 col-sm-3">
+        <div class="homes-col ${cssLi[index]}">
+          <p class="link homes-col__link">${el.name}</p>
+          <p class="subtitle homes-col__subtitle">${el.city}, ${el.country}</p>
+        </div>
+      </div>`;
+  });
+  return markupArr.join('');
+};
 
-data.forEach((el, index) => {
-  const cssLi = ['hotel', 'apartment', 'villa', 'hostel'];
-  const homesMediaQ = document.createElement('div');
-  homesMediaQ.setAttribute('id', `${el.id}`);
-  homesMediaQ.classList.add('col-lg-3', 'col-md-6', 'col-sm-3');
-  const homesCol = document.createElement('div');
-  homesCol.classList.add('homes-col', cssLi[index]);
-  homesMediaQ.appendChild(homesCol);
-  const homesImage = document.createElement('img');
-  homesImage.setAttribute('src', `${el.imageUrl}`);
-  homesImage.className = 'homes-col__image';
-  homesCol.appendChild(homesImage);
-  homesImages.appendChild(homesMediaQ);
-  const homesMediaQlink = document.createElement('div');
-  homesMediaQlink.classList.add('col-lg-3', 'col-md-6', 'col-sm-3');
-  const homesColLink = document.createElement('div');
-  homesColLink.classList.add('homes-col', cssLi[index]);
-  homesMediaQlink.appendChild(homesColLink);
-  const homesLink = document.createElement('p');
-  homesLink.classList.add('link', 'homes-col__link');
-  homesLink.textContent = `${el.name}`;
-  const homesSubtitle = document.createElement('p');
-  homesSubtitle.classList.add('subtitle', 'homes-col__subtitle');
-  homesSubtitle.textContent = `${el.city}, ${el.country}`;
-  homesColLink.appendChild(homesLink);
-  homesColLink.appendChild(homesSubtitle);
-  homesLinks.appendChild(homesMediaQlink);
-});
+const markup1 = `
+<section class="homes">
+  <div class="container homes-container">
+    <h2 class="title homes-title">Homes guests loves</h2>
+    <div class="row homes-row homes-images">
+      ${addImages()};
+      <div class="homes-arrow">
+        <svg class="arrow_svg">
+          <use href="#arrow"/>
+        </svg>
+      </div>
+    </div>
+    <div class="row homes-row homes-links">
+      ${addLinks()};
+    </div>
+  </div>
+</section>
+`;
 
-const homesArrow = document.createElement('div');
-homesArrow.className = 'homes-arrow';
-const arrowSvg = document.createElement('svg');
-arrowSvg.className = 'arrow_svg';
-const useArrow = document.createElement('use');
-useArrow.setAttribute('href', '#arrow');
-homesImages.appendChild(homesArrow);
-homesArrow.appendChild(arrowSvg);
-arrowSvg.appendChild(useArrow);
+const destinationsSection = document.querySelector('.destinations');
+destinationsSection.insertAdjacentHTML('beforebegin', markup1);
