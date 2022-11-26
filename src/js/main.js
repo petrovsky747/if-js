@@ -36,10 +36,10 @@ const data = [
 const addImages = () => {
   const markupArr = [];
   data.forEach((el, index) => {
-    const cssLi = ['hotel', 'apartment', 'villa', 'hostel'];
+    const imgAlt = ['hotel', 'apartment', 'villa', 'hostel'];
     markupArr[index] = `<div id="${el.id}" class="col-lg-3 col-md-6 col-sm-3">
-      <div class="homes-col ${cssLi[index]}">
-        <img class="homes-col__image" src="${el.imageUrl}" alt="${cssLi[index]}">
+      <div class="homes-col">
+        <img class="homes-col__image" src="${el.imageUrl}" alt="${imgAlt[index]}">
       </div>
     </div>`;
   });
@@ -49,10 +49,9 @@ const addImages = () => {
 const addLinks = () => {
   const markupArr = [];
   data.forEach((el, index) => {
-    const cssLi = ['hotel', 'apartment', 'villa', 'hostel'];
     markupArr[index] = `
       <div class="col-lg-3 col-md-6 col-sm-3">
-        <div class="homes-col ${cssLi[index]}">
+        <div class="homes-col">
           <p class="link homes-col__link">${el.name}</p>
           <p class="subtitle homes-col__subtitle">${el.city}, ${el.country}</p>
         </div>
@@ -61,12 +60,12 @@ const addLinks = () => {
   return markupArr.join('');
 };
 
-const markup1 = `
+const homesSection = `
 <section class="homes">
   <div class="container homes-container">
     <h2 class="title homes-title">Homes guests loves</h2>
     <div class="row homes-row homes-images">
-      ${addImages()};
+      ${addImages()}
       <div class="homes-arrow">
         <svg class="arrow_svg">
           <use href="#arrow"/>
@@ -74,11 +73,11 @@ const markup1 = `
       </div>
     </div>
     <div class="row homes-row homes-links">
-      ${addLinks()};
+      ${addLinks()}
     </div>
   </div>
 </section>
 `;
 
 const destinationsSection = document.querySelector('.destinations');
-destinationsSection.insertAdjacentHTML('beforebegin', markup1);
+destinationsSection.insertAdjacentHTML('beforebegin', homesSection);

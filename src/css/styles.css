@@ -1116,8 +1116,8 @@ body {
     margin-bottom: 0;
   }
 
-  .villa,
-  .hostel {
+
+  .homes-row div:nth-child(3), div:nth-child(4) {
     display: none;
   }
 
