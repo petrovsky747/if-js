@@ -60,7 +60,8 @@ const addLinks = () => {
   return markupArr.join('');
 };
 
-const homesSection = `<section class="homes">
+const homesSection = `
+<section class="homes">
   <div class="container homes-container">
     <h2 class="title homes-title">Homes guests loves</h2>
     <div class="row homes-row homes-images">
