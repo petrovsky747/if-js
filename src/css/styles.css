@@ -1,5 +1,14 @@
 @import url('./fonts.css');
 
+select {
+  /*reset styles for select arrow  font: inherit;*/
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 :root {
   --col-width: calc(100% / 12);
   --container-space: 120px;
@@ -211,6 +220,7 @@ body {
 }
 
 .topsection-form {
+  position: relative;
   display: flex;
   background: #ffffff;
   font-family: 'Roboto', sans-serif;
@@ -304,8 +314,23 @@ body {
   align-self: center;
 }
 
-.topsection-guests {
+.topsection-guests-desktop {
   display: flex;
+  flex-basis: 314px;
+  min-width: 314px;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.guests_active {
+  border: 3px solid #f5bd41;
+  border-radius: 8px;
+}
+
+.topsection-guests {
+  display: none;
   flex-basis: 314px;
   min-width: 314px;
 }
@@ -329,28 +354,159 @@ body {
 .topsection-room__label {
   position: absolute;
   top: 23px;
-  left: 18px;
+  left: 26px;
   color: #383838;
 }
 
 .topsection-adults__label {
-  left: 44px;
+  left: 47px;
 }
 
 .topsection-adults__input {
-  padding-left: 26px;
+  padding-left: 22px;
 }
 
 .topsection-children__label {
-  left: 21px;
+  left: 24px;
 }
 
 .topsection-children__input {
-  padding-left: 4px;
+  padding-left: 0;
 }
 
 .topsection-room__input {
-  padding-right: 10px;
+  padding-right: 4px;
+}
+
+.topsection-filter {
+  position: absolute;
+  top: 76px;
+  right: 192px;
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 259px;
+  background-color: #ffffff;
+  padding: 22px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+}
+
+.filter-titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #333333;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.17;
+  width: 50%;
+}
+
+.filter-tiles__title {
+  height: 30px;
+  padding-top: 6px;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.filter-buttons-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filter-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #cecece;
+  background-color: #ffffff;
+}
+
+._button-active {
+  border: 1px solid #3077c6;
+}
+
+.button-minus {
+  padding-bottom: 8px;
+}
+
+.plus {
+  width: 9px;
+  height: 10px;
+}
+
+.minus {
+  width: 10px;
+  height: 3px;
+}
+
+.filter-counters-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filter-counters-col__counter {
+  color: #333333;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.17;
+  text-align: center;
+  height: 30px;
+  padding-top: 6px;
+  margin-bottom: 12px;
+}
+
+.filter-counters-col__counter:last-child {
+  margin-bottom: 0;
+}
+
+.filter-age,
+.age-select {
+  color: #333333;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.17;
+}
+
+.filter-age {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.age-select {
+  width: 99px;
+  height: 30px;
+  border: 1px solid #3077c6;
+  padding-left: 8px;
+  margin-bottom: 12px;
+}
+
+select:not([multiple]) {
+  padding-right: 8px;
+  background-repeat: no-repeat;
+  background-position: right 8px top 12px;
+  background-size: 10px 7px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.175 0L5 3.86302L8.825 0L10 1.18927L5 6.25L0 1.18927L1.175 0Z' fill='%233077C6'/%3E%3C/svg%3E%0A");
+}
+
+.filter-age__title {
+  margin-top: 28px;
+  padding-bottom: 12px;
 }
 
 .topsection-button {
@@ -1056,7 +1212,12 @@ body {
     line-height: 1.16;
   }
 
+  .topsection-guests-desktop {
+    display: none;
+  }
+
   .topsection-guests {
+    display: flex;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 12px 0;
@@ -1116,8 +1277,7 @@ body {
     margin-bottom: 0;
   }
 
-  .homes-row div:nth-child(3),
-  div:nth-child(4) {
+  .homes-row div:nth-child(n + 3):nth-child(-n + 4) {
     display: none;
   }
 

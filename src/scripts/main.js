@@ -1,83 +1,120 @@
-const data = [
-  {
-    id: '71ce9eac-e9b9-44f0-a342-9ff0b565f3b7',
-    name: 'Hotel Leopold',
-    city: 'Saint Petersburg',
-    country: 'Russia',
-    imageUrl:
-      'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/hotel-leopold_mflelk.jpg',
-  },
-  {
-    id: 'aa560608-a879-48a7-80b6-deff2806b250',
-    name: 'Apartment Sunshine',
-    city: 'Santa  Cruz de Tenerife',
-    country: 'Spain',
-    imageUrl:
-      'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/apartment-sunshine_vhdlel.jpg',
-  },
-  {
-    id: '1d88fefe-edf1-4cda-844a-babbf29bb2b3',
-    name: 'Villa Kunerad',
-    city: 'Vysokie Tatry',
-    country: 'Slowakia',
-    imageUrl:
-      'https://res.cloudinary.com/intellectfox/image/upload/v1610379365/fe/villa-kunerad_gdbqgv.jpg',
-  },
-  {
-    id: 'a2bf824d-edd8-41f0-8b70-244334086ab4',
-    name: 'Hostel Friendship',
-    city: 'Berlin',
-    country: 'Germany',
-    imageUrl:
-      'https://res.cloudinary.com/intellectfox/image/upload/v1610379364/fe/hostel-friendship_aw6tn7.jpg',
-  },
-];
+const adultMinus = document.getElementById('adult_minus');
+const adultPlus = document.getElementById('adult_plus');
+const adultCount = document.getElementById('adult_count');
+let adultAmount = 0;
+const adultFormText = document.querySelector(
+  '.topsection-guests-desktop__adult',
+);
 
-const addImages = () => {
-  const markupArr = [];
-  data.forEach((el, index) => {
-    const imgAlt = ['hotel', 'apartment', 'villa', 'hostel'];
-    markupArr[index] = `<div id="${el.id}" class="col-lg-3 col-md-6 col-sm-3">
-      <div class="homes-col">
-        <img class="homes-col__image" src="${el.imageUrl}" alt="${imgAlt[index]}">
-      </div>
-    </div>`;
-  });
-  return markupArr.join('');
-};
+const childMinus = document.getElementById('child_minus');
+const childPlus = document.getElementById('child_plus');
+const childCount = document.getElementById('child_count');
+let childAmount = 0;
+const childFormText = document.querySelector(
+  '.topsection-guests-desktop__child',
+);
 
-const addLinks = () => {
-  const markupArr = [];
-  data.forEach((el, index) => {
-    markupArr[index] = `
-      <div class="col-lg-3 col-md-6 col-sm-3">
-        <div class="homes-col">
-          <p class="link homes-col__link">${el.name}</p>
-          <p class="subtitle homes-col__subtitle">${el.city}, ${el.country}</p>
-        </div>
-      </div>`;
-  });
-  return markupArr.join('');
-};
+const roomMinus = document.getElementById('room_minus');
+const roomPlus = document.getElementById('room_plus');
+const roomCount = document.getElementById('room_count');
+let roomAmount = 0;
+const roomFormText = document.querySelector('.topsection-guests-desktop__room');
 
-const homesSection = `
-<section class="homes">
-  <div class="container homes-container">
-    <h2 class="title homes-title">Homes guests loves</h2>
-    <div class="row homes-row homes-images">
-      ${addImages()}
-      <div class="homes-arrow">
-        <svg class="arrow_svg">
-          <use href="#arrow"/>
-        </svg>
-      </div>
-    </div>
-    <div class="row homes-row homes-links">
-      ${addLinks()}
-    </div>
-  </div>
-</section>
-`;
+const guestsBlock = document.querySelector('.topsection-guests-desktop');
+const filterBlock = document.querySelector('.topsection-filter');
+const selectBlock = document.querySelector('.age-select');
 
-const destinationsSection = document.querySelector('.destinations');
-destinationsSection.insertAdjacentHTML('beforebegin', homesSection);
+guestsBlock.addEventListener('click', () => {
+  if (filterBlock.style.display === 'none') {
+    filterBlock.style.display = 'flex';
+    guestsBlock.classList.add('guests_active');
+  } else {
+    filterBlock.style.display = 'none';
+    guestsBlock.classList.remove('guests_active');
+  }
+});
+
+adultPlus.addEventListener('click', (event) => {
+  event.preventDefault();
+  adultMinus.classList.add('_button-active');
+  if (adultAmount >= 29) {
+    event.target.classList.remove('_button-active');
+    adultAmount = 30;
+  } else adultAmount++;
+  adultCount.textContent = adultAmount.toString();
+  adultFormText.textContent = `${adultAmount.toString()} Adults – `;
+});
+
+adultMinus.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (adultAmount <= 1) {
+    adultAmount = 0;
+    adultMinus.classList.remove('_button-active');
+  } else adultAmount--;
+  if (adultAmount <= 30) {
+    adultPlus.classList.add('_button-active');
+  }
+  adultCount.textContent = adultAmount.toString();
+  adultFormText.textContent = `${adultAmount.toString()} Adults – `;
+});
+
+childPlus.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (childAmount === 9) {
+    event.target.classList.remove('_button-active');
+    childAmount++;
+    selectBlock.insertAdjacentHTML('beforebegin', selectBlock.outerHTML);
+  } else if (childAmount === 0) {
+    childAmount++;
+    selectBlock.parentElement.style.display = 'flex';
+    childMinus.classList.add('_button-active');
+  } else if (childAmount > 9) {
+    childAmount = 10;
+  } else {
+    childAmount++;
+    selectBlock.insertAdjacentHTML('beforebegin', selectBlock.outerHTML);
+  }
+  childCount.textContent = childAmount.toString();
+  childFormText.textContent = `${childAmount.toString()} Children – `;
+});
+
+childMinus.addEventListener('click', (event) => {
+  event.preventDefault();
+  childPlus.classList.add('_button-active');
+  if (childAmount === 1) {
+    childAmount = 0;
+    childMinus.classList.remove('_button-active');
+  }
+  if (childAmount === 0) {
+    selectBlock.parentElement.style.display = 'none';
+  } else {
+    childAmount--;
+    document.querySelector('.age-select').remove();
+  }
+  childCount.textContent = childAmount.toString();
+  childFormText.textContent = `${childAmount.toString()} Children – `;
+});
+
+roomPlus.addEventListener('click', (event) => {
+  event.preventDefault();
+  roomMinus.classList.add('_button-active');
+  if (roomAmount >= 29) {
+    event.target.classList.remove('_button-active');
+    roomAmount = 30;
+  } else roomAmount++;
+  roomCount.textContent = roomAmount.toString();
+  roomFormText.textContent = `${roomAmount.toString()} Rooms`;
+});
+
+roomMinus.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (roomAmount <= 2) {
+    roomAmount = 1;
+    roomMinus.classList.remove('_button-active');
+  } else roomAmount--;
+  if (roomAmount <= 30) {
+    roomPlus.classList.add('_button-active');
+  }
+  roomCount.textContent = roomAmount.toString();
+  roomFormText.textContent = `${roomAmount.toString()} Rooms`;
+});

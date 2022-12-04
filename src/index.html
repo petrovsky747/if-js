@@ -65,6 +65,15 @@
           fill="#BFBFBF"
         />
       </symbol>
+      <symbol id="plus" viewBox="0 0 9 10">
+        <path
+          fill="#3077C6"
+          d="M5.282 4.136h3.569v1.538H5.282v4.043H3.647V5.674H.08V4.136h3.568V.4h1.635v3.736Z"
+        />
+      </symbol>
+      <symbol id="minus" viewBox="0 0 10 3">
+        <path fill="#3077C6" d="M9.324 2.278H.518V.951h8.806v1.327Z" />
+      </symbol>
       <symbol id="google_play" viewBox="0 0 135 40" fill="none">
         <path
           d="M130 40H5c-2.75 0-5-2.25-5-5V5c0-2.75 2.25-5 5-5h125c2.75 0 5 2.25 5 5v30c0 2.75-2.25 5-5 5Z"
@@ -318,14 +327,19 @@
                 />
               </div>
             </div>
+            <div class="topsection-guests-desktop">
+              <p class="topsection-guests-desktop__adult">0 Adults –</p>
+              <p class="topsection-guests-desktop__child">0 Children –</p>
+              <p class="topsection-guests-desktop__room">0 Rooms</p>
+            </div>
             <div class="topsection-guests">
               <div class="topsection-adults">
-                <label class="topsection-adults__label label" for="adults"
+                <label class="topsection-adults__label label" for="adults_input"
                   >Adults</label
                 >
                 <input
                   class="input topsection-adults__input"
-                  id="adults"
+                  id="adults_input"
                   type="text"
                   name="adults"
                   placeholder="2"
@@ -336,12 +350,14 @@
                 <p>&ndash;</p>
               </div>
               <div class="topsection-children">
-                <label class="topsection-children__label label" for="children"
+                <label
+                  class="topsection-children__label label"
+                  for="child_input"
                   >Children</label
                 >
                 <input
                   class="input topsection-children__input"
-                  id="children"
+                  id="child_input"
                   type="text"
                   name="children"
                   placeholder="0"
@@ -352,17 +368,99 @@
                 <p>&ndash;</p>
               </div>
               <div class="topsection-room">
-                <label class="topsection-room__label label" for="room"
+                <label class="topsection-room__label label" for="room_input"
                   >Rooms</label
                 >
                 <input
                   class="input topsection-room__input"
-                  id="room"
+                  id="room_input"
                   type="text"
                   name="room"
                   placeholder="1"
                   value="1"
                 />
+              </div>
+            </div>
+            <div id="filter" class="topsection-filter">
+              <div class="filter-titles">
+                <p class="filter-tiles__title">Adults</p>
+                <p class="filter-tiles__title">Children</p>
+                <p class="filter-tiles__title">Rooms</p>
+              </div>
+              <div class="filter-buttons">
+                <div class="filter-buttons-col">
+                  <button id="adult_minus" class="filter-button button-minus">
+                    <svg class="minus">
+                      <use href="#minus" />
+                    </svg>
+                  </button>
+                  <button id="child_minus" class="filter-button button-minus">
+                    <svg class="minus">
+                      <use href="#minus" />
+                    </svg>
+                  </button>
+                  <button id="room_minus" class="filter-button button-minus">
+                    <svg class="minus">
+                      <use href="#minus" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="filter-counters-col">
+                  <p id="adult_count" class="filter-counters-col__counter">0</p>
+                  <p id="child_count" class="filter-counters-col__counter">0</p>
+                  <p id="room_count" class="filter-counters-col__counter">0</p>
+                </div>
+                <div class="filter-buttons-col">
+                  <button
+                    id="adult_plus"
+                    class="filter-button button-plus _button-active"
+                  >
+                    <svg class="plus">
+                      <use href="#plus" />
+                    </svg>
+                  </button>
+                  <button
+                    id="child_plus"
+                    class="filter-button button-plus _button-active"
+                  >
+                    <svg class="plus">
+                      <use href="#plus" />
+                    </svg>
+                  </button>
+                  <button
+                    id="room_plus"
+                    class="filter-button button-plus _button-active"
+                  >
+                    <svg class="plus">
+                      <use href="#plus" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="filter-age">
+                <p class="filter-age__title">
+                  What is the age of the child you’re travelling with?
+                </p>
+                <select class="age-select" name="age_select">
+                  <option value="0_age">0 years old</option>
+                  <option value="1_age">1 years old</option>
+                  <option value="2_age">2 years old</option>
+                  <option value="3_age">3 years old</option>
+                  <option value="4_age">4 years old</option>
+                  <option value="5_age">5 years old</option>
+                  <option value="6_age">6 years old</option>
+                  <option value="7_age">7 years old</option>
+                  <option value="8_age" selected>8 years old</option>
+                  <option value="_age">9 years old</option>
+                  <option value="_age">10 years old</option>
+                  <option value="_age">11 years old</option>
+                  <option value="_age">12 years old</option>
+                  <option value="_age">13 years old</option>
+                  <option value="_age">14 years old</option>
+                  <option value="_age">15years old</option>
+                  <option value="_age">16 years old</option>
+                  <option value="_age">17 years old</option>
+                </select>
               </div>
             </div>
             <button class="button topsection-button">Search</button>
@@ -412,6 +510,86 @@
                 <use href="#reviews" />
               </svg>
               <h2 class="advantages-col__subtitle">Real guest reviews</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="homes">
+      <div class="container homes-container">
+        <h2 class="title homes-title">Homes guests loves</h2>
+        <div class="row homes-row homes-images">
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col hotel">
+              <img
+                class="homes-col__image"
+                src="./images/hotel.jpg"
+                alt="hotel"
+              />
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col apartment">
+              <img
+                class="homes-col__image"
+                src="./images/apartment.jpg"
+                alt="apartment"
+              />
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col villa">
+              <img
+                class="homes-col__image"
+                src="./images/villa.jpg"
+                alt="villa"
+              />
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col hostel">
+              <img
+                class="homes-col__image"
+                src="./images/hostel.jpg"
+                alt="hostel"
+              />
+            </div>
+          </div>
+          <div class="homes-arrow">
+            <svg class="arrow_svg">
+              <use href="#arrow" />
+            </svg>
+          </div>
+        </div>
+        <div class="row homes-row homes-links">
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col hotel">
+              <p class="link homes-col__link">Hotel Leopold</p>
+              <p class="subtitle homes-col__subtitle">
+                Saint Petersburg, Russia
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col apartment">
+              <p class="link homes-col__link">Apartment Sunshine</p>
+              <p class="subtitle homes-col__subtitle">
+                Santa Cruz de Tenerife, Spain
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col villa">
+              <p class="link homes-col__link">Villa Kunerad</p>
+              <p class="subtitle homes-col__subtitle">
+                Vysokie Tatry, Slowakia
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-3">
+            <div class="homes-col hostel">
+              <p class="link homes-col__link">Hostel Friendship</p>
+              <p class="subtitle homes-col__subtitle">Berlin, Germany</p>
             </div>
           </div>
         </div>
@@ -745,6 +923,6 @@
         </p>
       </div>
     </footer>
-    <script src="js/main.js"></script>
+    <script src="scripts/main.js"></script>
   </body>
 </html>
