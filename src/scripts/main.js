@@ -1,7 +1,7 @@
 const adultMinus = document.getElementById('adult_minus');
 const adultPlus = document.getElementById('adult_plus');
 const adultCount = document.getElementById('adult_count');
-let adultAmount = 0;
+let adultAmount = 2;
 const adultFormText = document.querySelector(
   '.topsection-guests-desktop__adult',
 );
@@ -17,21 +17,28 @@ const childFormText = document.querySelector(
 const roomMinus = document.getElementById('room_minus');
 const roomPlus = document.getElementById('room_plus');
 const roomCount = document.getElementById('room_count');
-let roomAmount = 0;
+let roomAmount = 1;
 const roomFormText = document.querySelector('.topsection-guests-desktop__room');
 
 const guestsBlock = document.querySelector('.topsection-guests-desktop');
 const filterBlock = document.querySelector('.topsection-filter');
 const selectBlock = document.querySelector('.age-select');
 
-guestsBlock.addEventListener('click', () => {
-  if (filterBlock.style.display === 'none') {
-    filterBlock.style.display = 'flex';
-    guestsBlock.classList.add('guests_active');
-  } else {
+document.addEventListener('click', (e) => {
+  if (
+    !e.target.matches(
+      '.topsection-guests-desktop, .topsection-guests-desktop *, .topsection-filter, .topsection-filter *',
+    )
+  ) {
     filterBlock.style.display = 'none';
     guestsBlock.classList.remove('guests_active');
   }
+});
+
+guestsBlock.addEventListener('click', () => {
+  if (filterBlock.style.display === 'none' || filterBlock.style.display === '')
+    filterBlock.style.display = 'flex';
+  guestsBlock.classList.add('guests_active');
 });
 
 adultPlus.addEventListener('click', (event) => {
@@ -47,8 +54,8 @@ adultPlus.addEventListener('click', (event) => {
 
 adultMinus.addEventListener('click', (event) => {
   event.preventDefault();
-  if (adultAmount <= 1) {
-    adultAmount = 0;
+  if (adultAmount <= 2) {
+    adultAmount = 1;
     adultMinus.classList.remove('_button-active');
   } else adultAmount--;
   if (adultAmount <= 30) {
