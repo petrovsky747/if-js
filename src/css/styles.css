@@ -588,35 +588,38 @@ select:not([multiple]) {
   background-color: #eaf0f9;
 }
 
-.homes-images {
-  position: relative;
+.carousel-cell {
+  width: 296px;
+  height: 430px;
+  margin-right: 16px;
 }
 
-.homes-col {
-  text-align: center;
+.flickity-prev-next-button {
+  top: 35%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.flickity-prev-next-button.previous {
+  left: -20px;
+}
+
+.flickity-prev-next-button.next {
+  right: -20px;
 }
 
 .homes-col__image {
   width: 100%;
   max-width: 296px;
+  min-height: 296px;
+  max-height: 296px;
 }
 
 .homes-col__link,
 .homes-col__subtitle {
   text-align: left;
-}
-
-.homes-arrow {
-  display: flex;
-  background: #f3f3f4;
-  width: var(--arrow-size);
-  height: var(--arrow-size);
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  right: -10px;
-  transform: translateY(-50%);
-  box-shadow: 1px 4px 4px rgba(100, 100, 100, 0.2);
 }
 
 .subtitle {
@@ -1273,12 +1276,19 @@ select:not([multiple]) {
     line-height: 1.17;
   }
 
-  .homes-row {
-    margin-bottom: 0;
+  .carousel-cell {
+    width: 50%;
+    height: 380px;
+    margin-right: 8px;
   }
 
-  .homes-row div:nth-child(n + 3):nth-child(-n + 4) {
-    display: none;
+  .homes-col__image {
+    width: 100%;
+    max-width: 296px;
+  }
+
+  .flickity-prev-next-button {
+    top: 40%;
   }
 
   .link {
@@ -1650,13 +1660,30 @@ select:not([multiple]) {
     margin-bottom: 0;
   }
 
-  .homes-row {
-    flex-direction: row;
-    margin-bottom: 0;
+  .carousel-cell {
+    width: 50%;
+    height: 200px;
   }
 
   .homes-col__image {
+    width: 100%;
     max-width: 156px;
+    max-height: 156px;
+    min-height: 156px;
+  }
+
+  .flickity-prev-next-button {
+    top: 40%;
+    width: 28px;
+    height: 28px;
+  }
+
+  .flickity-prev-next-button.previous {
+    left: -12px;
+  }
+
+  .flickity-prev-next-button.next {
+    right: -12px;
   }
 
   .link {
@@ -1669,11 +1696,6 @@ select:not([multiple]) {
     font-size: 12px;
     line-height: 1.16;
     margin-top: 4px;
-  }
-
-  .homes-arrow {
-    top: 44%;
-    right: -4px;
   }
 
   .arrow_svg {

@@ -125,3 +125,66 @@ roomMinus.addEventListener('click', (event) => {
   roomCount.textContent = roomAmount.toString();
   roomFormText.textContent = `${roomAmount.toString()} Rooms`;
 });
+
+fetch('https://if-student-api.onrender.com/api/hotels/popular')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`${response.status} - ${response.statusText}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    const addImages = () => {
+      const markupArr = [];
+      data.forEach((el, index) => {
+        const imgAlt = ['hotel', 'apartment', 'villa', 'hostel'];
+        markupArr[index] = `<div id="${el.id}" class="carousel-cell">
+      <div>
+        <img class="homes-col__image" src="${el.imageUrl}" alt="${imgAlt[index]}">
+        <p class="link homes-col__link">${el.name}</p>
+          <p class="subtitle homes-col__subtitle">${el.city}, ${el.country}</p>
+      </div>
+    </div>`;
+      });
+      return markupArr.join('');
+    };
+
+    const homesSection = `
+<section class="homes">
+  <div class="container homes-container">
+    <h2 class="title homes-title">Homes guests loves</h2>
+    <div class="main-carousel">
+      ${addImages()}
+    </div>
+  </div>
+</section>
+`;
+
+    const destinationsSection = document.querySelector('.destinations');
+    destinationsSection.insertAdjacentHTML('beforebegin', homesSection);
+
+    const elem = document.querySelector('.main-carousel');
+    // eslint-disable-next-line no-undef
+    const flkty = new Flickity(elem, {
+      // options
+      cellAlign: 'left',
+      contain: true,
+      draggable: false,
+      groupCells: true,
+      pageDots: false,
+      percentPosition: false,
+      arrowShape: {
+        x0: 35,
+        x1: 60,
+        y1: 35,
+        x2: 70,
+        y2: 35,
+        x3: 45,
+      },
+    });
+    flkty.next();
+    flkty.select(4);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
