@@ -126,7 +126,93 @@ roomMinus.addEventListener('click', (event) => {
   roomFormText.textContent = `${roomAmount.toString()} Rooms`;
 });
 
-fetch('https://if-student-api.onrender.com/api/hotels/popular')
+const topsectionForm = document.querySelector('.topsection-form');
+
+const addContent = (data) => {
+  const markupArr = [];
+  data.forEach((el, index) => {
+    markupArr[index] = `<div id="${el.id}" class="carousel-cell">
+      <div>
+        <img class="homes-col__image" src="${el.imageUrl}" alt="Apartment photo">
+        <p class="link homes-col__link">${el.name}</p>
+          <p class="subtitle homes-col__subtitle">${el.city}, ${el.country}</p>
+      </div>
+    </div>`;
+  });
+  return markupArr.join('');
+};
+
+topsectionForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const searchKey = document.getElementById('city').value;
+  fetch(`https://if-student-api.onrender.com/api/hotels?search=${searchKey}`, {
+    method: 'GET',
+    headers: {
+      'content-type': 'application-json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`${response.status} - ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const availableSection = `
+<section class="available">
+  <div class="container available-container">
+    <h2 class="title available-title">Available hotels</h2>
+    <div class="main-carousel">
+      ${addContent(data)}
+    </div>
+  </div>
+</section>
+`;
+      const currentSection = document.querySelector('.available');
+
+      if (currentSection !== null) {
+        currentSection.outerHTML = availableSection;
+      } else {
+        const advantagesSection = document.querySelector('.advantages');
+        advantagesSection.insertAdjacentHTML('beforebegin', availableSection);
+      }
+
+      const elem = document.querySelector('.main-carousel');
+      // eslint-disable-next-line no-undef
+      const flkty = new Flickity(elem, {
+        // options
+        cellAlign: 'center',
+        contain: true,
+        draggable: false,
+        groupCells: true,
+        pageDots: false,
+        percentPosition: false,
+        arrowShape: {
+          x0: 35,
+          x1: 60,
+          y1: 35,
+          x2: 70,
+          y2: 35,
+          x3: 45,
+        },
+      });
+      if (data.length <= 3) {
+        flkty.options.cellAlign = 'center';
+      }
+      flkty.next();
+      flkty.select(4);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+});
+
+fetch('https://if-student-api.onrender.com/api/hotels/popular', {
+  method: 'GET',
+  headers: {
+    'content-type': 'application-json',
+  },
+})
   .then((response) => {
     if (!response.ok) {
       throw new Error(`${response.status} - ${response.statusText}`);
@@ -134,27 +220,12 @@ fetch('https://if-student-api.onrender.com/api/hotels/popular')
     return response.json();
   })
   .then((data) => {
-    const addImages = () => {
-      const markupArr = [];
-      data.forEach((el, index) => {
-        const imgAlt = ['hotel', 'apartment', 'villa', 'hostel'];
-        markupArr[index] = `<div id="${el.id}" class="carousel-cell">
-      <div>
-        <img class="homes-col__image" src="${el.imageUrl}" alt="${imgAlt[index]}">
-        <p class="link homes-col__link">${el.name}</p>
-          <p class="subtitle homes-col__subtitle">${el.city}, ${el.country}</p>
-      </div>
-    </div>`;
-      });
-      return markupArr.join('');
-    };
-
     const homesSection = `
 <section class="homes">
   <div class="container homes-container">
     <h2 class="title homes-title">Homes guests loves</h2>
     <div class="main-carousel">
-      ${addImages()}
+      ${addContent(data)}
     </div>
   </div>
 </section>
