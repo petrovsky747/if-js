@@ -251,8 +251,9 @@ const addData = (data) => {
 
 const dataKeys = JSON.parse(sessionStorage.getItem('data'));
 if (dataKeys !== null) {
-  console.log(dataKeys);
-  addData(dataKeys);
+  if (Object.keys(dataKeys[0]).toString() === 'id,name,city,country,imageUrl') {
+    addData(dataKeys);
+  }
 } else {
   fetch('https://if-student-api.onrender.com/api/hotels/popular', {
     method: 'GET',
@@ -275,59 +276,3 @@ if (dataKeys !== null) {
       console.log(err.message);
     });
 }
-
-// fetch('https://if-student-api.onrender.com/api/hotels/popular', {
-//   method: 'GET',
-//   headers: {
-//     'content-type': 'application-json',
-//   },
-// })
-//   .then((response) => {
-//     debugger;
-//     if (!response.ok) {
-//       throw new Error(`${response.status} - ${response.statusText}`);
-//     }
-//     return response.json();
-//   })
-//   .then((data) => {
-//     debugger;
-//     sessionStorage.setItem('data', JSON.stringify(data));
-//     const homesSection = `
-// <section class="homes">
-//   <div class="container homes-container">
-//     <h2 class="title homes-title">Homes guests loves</h2>
-//     <div class="main-carousel">
-//       ${addContent(data)}
-//     </div>
-//   </div>
-// </section>
-// `;
-//
-//     const destinationsSection = document.querySelector('.destinations');
-//     destinationsSection.insertAdjacentHTML('beforebegin', homesSection);
-//
-//     const elem = document.querySelector('.main-carousel');
-//     // eslint-disable-next-line no-undef
-//     const flkty = new Flickity(elem, {
-//       // options
-//       cellAlign: 'left',
-//       contain: true,
-//       draggable: false,
-//       groupCells: true,
-//       pageDots: false,
-//       percentPosition: false,
-//       arrowShape: {
-//         x0: 35,
-//         x1: 60,
-//         y1: 35,
-//         x2: 70,
-//         y2: 35,
-//         x3: 45,
-//       },
-//     });
-//     flkty.next();
-//     flkty.select(4);
-//   })
-//   .catch((err) => {
-//     console.log(err.message);
-//   });
