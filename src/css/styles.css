@@ -1,9 +1,14 @@
 @import url('./fonts.css');
 
-.topsection, .advantages, .homes, .destinations, .sign-up, .review, .footer {
+.topsection,
+.advantages,
+.homes,
+.destinations,
+.sign-up,
+.review,
+.footer {
   display: none;
 }
-
 
 .form {
   display: flex;
