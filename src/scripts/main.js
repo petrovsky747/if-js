@@ -259,3 +259,28 @@ fetch('https://if-student-api.onrender.com/api/hotels/popular', {
   .catch((err) => {
     console.log(err.message);
   });
+
+// ________________________________________________________
+
+const formEl = document.getElementById('form');
+
+formEl.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const body = new FormData(formEl);
+
+  const fetchOptions = {
+    method: 'POST',
+    body,
+  };
+
+  await fetch('https://if-student-api.onrender.com/api/file', fetchOptions)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((result) => console.log(result))
+    .catch((error) => console.log(error.message));
+});
