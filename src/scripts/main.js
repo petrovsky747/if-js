@@ -144,8 +144,24 @@ const generateMarkup = (data) => {
 
 topsectionForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  const urlSearch = new URL('https://if-student-api.onrender.com/api/hotels');
   const searchKey = document.getElementById('city').value;
-  fetch(`https://if-student-api.onrender.com/api/hotels?search=${searchKey}`, {
+  const params = new URLSearchParams({
+    search: searchKey,
+    adults: adultAmount,
+    rooms: roomAmount,
+  });
+
+  if (childAmount > 0) {
+    const allChildrenSelects = document.querySelectorAll('.age-select');
+    const years = [];
+    allChildrenSelects.forEach((select) => {
+      years.push(select.selectedIndex);
+    });
+    params.set('children', years.join(','));
+  }
+
+  fetch(`${urlSearch.href}?${decodeURIComponent(params.toString())}`, {
     method: 'GET',
     headers: {
       'content-type': 'application-json',
@@ -206,6 +222,24 @@ topsectionForm.addEventListener('submit', (event) => {
       console.log(err.message);
     });
 });
+
+function bubbleSortConcept2(arr) {
+  let swapped;
+
+  do {
+    swapped = false;
+    arr.forEach((item, index) => {
+      if (index < arr.length - 1) {
+        if (item['name'] > arr[index + 1]['name']) {
+          const temp = item;
+          arr[index] = arr[index + 1];
+          arr[index + 1] = temp;
+          swapped = true;
+        }
+      }
+    });
+  } while (swapped);
+}
 
 function addSlider() {
   const elem = document.querySelector('.main-carousel');
@@ -268,8 +302,8 @@ if (dataKeys !== null) {
       return response.json();
     })
     .then((data) => {
+      bubbleSortConcept2(data);
       sessionStorage.setItem('data', JSON.stringify(data));
-      console.log(data);
       addData(data);
     })
     .catch((err) => {
