@@ -223,22 +223,25 @@ topsectionForm.addEventListener('submit', (event) => {
     });
 });
 
-function bubbleSortConcept2(arr) {
+function bubbleSort(arr) {
+  const dataCopy = JSON.parse(JSON.stringify(arr));
   let swapped;
 
   do {
     swapped = false;
-    arr.forEach((item, index) => {
-      if (index < arr.length - 1) {
-        if (item['name'] > arr[index + 1]['name']) {
+
+    dataCopy.forEach((item, index) => {
+      if (index < dataCopy.length - 1) {
+        if (item['name'] > dataCopy[index + 1]['name']) {
           const temp = item;
-          arr[index] = arr[index + 1];
-          arr[index + 1] = temp;
+          dataCopy[index] = dataCopy[index + 1];
+          dataCopy[index + 1] = temp;
           swapped = true;
         }
       }
     });
   } while (swapped);
+  return dataCopy;
 }
 
 function addSlider() {
@@ -302,9 +305,9 @@ if (dataKeys !== null) {
       return response.json();
     })
     .then((data) => {
-      bubbleSortConcept2(data);
-      sessionStorage.setItem('data', JSON.stringify(data));
-      addData(data);
+      const sortedData = bubbleSort(data);
+      sessionStorage.setItem('data', JSON.stringify(sortedData));
+      addData(sortedData);
     })
     .catch((err) => {
       console.log(err.message);
