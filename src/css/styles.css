@@ -1,27 +1,5 @@
 @import url('./fonts.css');
 
-.topsection,
-.advantages,
-.homes,
-.destinations,
-.sign-up,
-.review,
-.footer {
-  display: none;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  gap: 16px;
-  margin: 80px 0 0 16px;
-}
-
-button {
-  height: 30px;
-}
-
 select {
   /*reset styles for select arrow  font: inherit;*/
   letter-spacing: inherit;
@@ -637,15 +615,15 @@ select:not([multiple]) {
   right: -20px;
 }
 
-.homes-col__image {
+.hotels-col__image {
   width: 100%;
   max-width: 296px;
   min-height: 296px;
   max-height: 296px;
 }
 
-.homes-col__link,
-.homes-col__subtitle {
+.hotels-col__link,
+.hotels-col__subtitle {
   text-align: left;
 }
 
@@ -1309,7 +1287,7 @@ select:not([multiple]) {
     margin-right: 8px;
   }
 
-  .homes-col__image {
+  .hotels-col__image {
     width: 100%;
     max-width: 296px;
   }
@@ -1692,7 +1670,7 @@ select:not([multiple]) {
     height: 200px;
   }
 
-  .homes-col__image {
+  .hotels-col__image {
     width: 100%;
     max-width: 156px;
     max-height: 156px;
