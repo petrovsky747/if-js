@@ -1,7 +1,7 @@
 import generateHomes from './generateHomesBlock.js';
-import searchHotels from './searchHotels.js';
-import searchFilter from './topsectionFilter.js';
+import search from './search.js';
+import searchFilter from './searchFilter.js';
 
 searchFilter();
-searchHotels();
+search();
 generateHomes();

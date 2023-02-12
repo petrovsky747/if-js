@@ -1,7 +1,7 @@
-import { generateHotelCards } from './blockGenerationFunctions.js';
-import { adultAmount, childAmount, roomAmount } from './topsectionFilter.js';
+import { addSlider, generateHotelCards } from './functions.js';
+import { adultAmount, childAmount, roomAmount } from './searchFilter.js';
 
-export default function searchHotels() {
+export default function search() {
   const topsectionForm = document.querySelector('.topsection-form');
 
   topsectionForm.addEventListener('submit', (event) => {
@@ -55,27 +55,7 @@ export default function searchHotels() {
           advantagesSection.insertAdjacentHTML('beforebegin', availableSection);
         }
 
-        const elem = document.querySelector('.main-carousel');
-        // eslint-disable-next-line no-undef
-        const flkty = new Flickity(elem, {
-          // options
-          cellAlign: 'center',
-          contain: true,
-          draggable: false,
-          groupCells: true,
-          pageDots: false,
-          percentPosition: false,
-          arrowShape: {
-            x0: 35,
-            x1: 60,
-            y1: 35,
-            x2: 70,
-            y2: 35,
-            x3: 45,
-          },
-        });
-        flkty.next();
-        flkty.select(4);
+        addSlider('center');
       })
       .catch((err) => {
         console.log(err.message);

@@ -1,5 +1,4 @@
-import { addData } from './blockGenerationFunctions.js';
-import bubbleSort from './bubbleSort.js';
+import { addData, bubbleSort } from './functions.js';
 
 export default function generateHomes() {
   const dataKeys = JSON.parse(sessionStorage.getItem('data'));
